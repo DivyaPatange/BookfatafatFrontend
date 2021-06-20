@@ -37,6 +37,12 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('book-service.index') }}">
+                    <i class="material-icons">assignment</i>
+                    <span>Book Service</span>
+                </a>
+            </li>
+            <li>
                 <a href="{{ url('/payment-details') }}">
                     <i class="material-icons">layers</i>
                     <span>Payment Details</span>

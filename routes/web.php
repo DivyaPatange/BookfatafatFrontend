@@ -21,7 +21,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DesignController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\User\OrderController;
-
+use App\Http\Controllers\User\BookServiceController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -100,6 +100,12 @@ Route::post('/success', [OrderController::class, 'paymentSuccess'])->name('succe
 Route::get('/payment-success/{id}', [OrderController::class, 'paymentDetail'])->name('payment-success');
 Route::get('/placed-order', [OrderController::class, 'placedOrderDetails']);
 Route::get('/payment-details', [OrderController::class, 'userPaymentDetails']);
+Route::resource('/book-service', BookServiceController::class);
+Route::get('/search-available-date', [BookServiceController::class, 'searchAvailableDate'])->name('search.available-date');
+
+Route::get('/services', [DesignController::class, 'allServices']);
+Route::post('filter-service', [DesignController::class, 'filterService'])->name('filter.service');
+
 
 // Route::prefix('admin')->name('admin.')->group(function() {
 //     // Admin Authentication Route

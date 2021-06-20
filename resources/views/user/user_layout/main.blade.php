@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Bookfatafat | User | Dashboard</title>
     <!-- Favicon-->
-    <link rel="icon" href="{{ asset('userAsset/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('frontasset/images/122 (1).png') }}" type="image/x-icon">
 
     @include('user.user_layout.stylesheet')
     @yield('customcss')

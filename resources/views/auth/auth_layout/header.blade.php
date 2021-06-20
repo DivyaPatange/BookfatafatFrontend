@@ -65,7 +65,7 @@
 
 <!-- banner -->
 <div class="ban-top">
-	<div class="container">
+	<div class="container-fluid">
 		<div class="top_nav_left">
 			<nav class="navbar navbar-default">
 			  <div class="container-fluid">
@@ -150,6 +150,7 @@
 					</li>
 					<li class=" menu__item"><a class="menu__link" href="{{ url('electronics') }}">Electronics</a></li>
 					<li class=" menu__item"><a class="menu__link" href="{{ url('products') }}">Products</a></li>
+					<li class=" menu__item"><a class="menu__link" href="{{ url('services') }}">Services</a></li>
 					<li class=" menu__item"><a class="menu__link" href="{{ url('contact') }}">contact</a></li>
 				  </ul>
 				</div>
