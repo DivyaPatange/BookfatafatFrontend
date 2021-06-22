@@ -5,6 +5,9 @@
 <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+ <!-- Bootstrap Core Css -->
+ <link href="{{ asset('userAsset/plugins/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
+
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <!-- JQuery DataTable Css -->
 <link href="{{ asset('userAsset/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}" rel="stylesheet">
@@ -40,6 +43,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
+                                <input type="hidden" name="service_id" id="service_id" value="{{ $service->id }}">
                                 <button type="button" id="submitButton" class="btn btn-success waves-effect">Search</button>
                             </div>
                         </div>
@@ -82,6 +86,48 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="serviceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Book Now</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <div class="form-line">
+                    <label for="">Available Date</label>
+                    <input type="date" readonly id="available_date" class="form-control" name="available_date" value="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table">
+                        <thead>
+                            <tr>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="serviceDiv"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <input type="hidden" name="available_date_id" id="available_date_id" value="">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
 @section('customjs')
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script> -->
@@ -91,6 +137,14 @@
 <script src="{{ asset('userAsset/plugins/jquery-datatable/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('userAsset/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js') }}"></script>
 <script src="{{ asset('userAsset/js/pages/tables/jquery-datatable.js') }}"></script>
+<!-- Autosize Plugin Js -->
+<script src="{{ asset('userAsset/plugins/autosize/autosize.js') }}"></script>
+<!-- Bootstrap Material Datetime Picker Plugin Js -->
+<script src="{{ asset('userAsset/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}"></script>
+
+<!-- Bootstrap Datepicker Plugin Js -->
+<script src="{{ asset('userAsset/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
+<script src="{{ asset('userAsset/js/pages/forms/basic-form-elements.js') }}"></script>
 <script>
 var SITEURL = "{{ route('search.available-date') }}";
 $(function() {
@@ -111,16 +165,16 @@ $(function() {
 });
 
 $(document).ready(function() {
-    fetch_data(start_date = '', end_date = '', start_time = '', end_time = '');
-    function fetch_data(start_date = '', end_date = '', start_time = '', end_time = ''){
-        // alert(student);
-    var table = $('#dataTable').DataTable({
+    fetch_data(start_date = '', end_date = '', start_time = '', end_time = '', service_id = '');
+    function fetch_data(start_date = '', end_date = '', start_time = '', end_time = '', service_id = ''){
+        // alert(start_date);
+    var table = $('.js-basic-example').DataTable({
     processing: true,
     serverSide: true,
     ajax: {
     url: SITEURL,
     type: 'GET',
-    data: {start_date:start_date, end_date:end_date, start_time:start_time, end_time:end_time}
+    data: {start_date:start_date, end_date:end_date, start_time:start_time, end_time:end_time, service_id:service_id}
     },
     columns: [
         { data: 'available_date', name: 'available_date' },
@@ -135,10 +189,32 @@ $(document).ready(function() {
         var start_date = $("#start_date").val();
         var end_date = $("#end_date").val(); 
         var start_time = $("#start_time").val();
-        var end_time = $("#end_time").val();
-        $("#simpletable").DataTable().destroy();
-        fetch_data(start_date, end_date, start_time, end_time);
+        var end_time = $("#end_time").val(); 
+        var service_id = $("#service_id").val();
+        // var oTable = $('.dataTable').dataTable(); 
+        // oTable.fnDraw(false);
+        $(".js-basic-example").DataTable().destroy();
+        fetch_data(start_date, end_date, start_time, end_time, service_id);
     });
 });
+
+function ServiceModel(obj,bid)
+{
+  var datastring="bid="+bid;
+  $.ajax({
+    type:"POST",
+    url:"{{ route('get-book-service') }}",
+    data:datastring,
+    cache:false,        
+    success:function(returndata)
+    {
+        $("#serviceModal").modal('show');
+        var json = JSON.parse(returndata);
+        $("#available_date").val(json.available_date);
+        $("#available_date_id").val(json.available_date_id);
+        $("#serviceDiv").html(json.time_slot);
+    }
+  });
+}
 </script>
 @endsection

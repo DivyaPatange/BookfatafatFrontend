@@ -133,9 +133,9 @@ $('body').on('click', '#submitLogin', function () {
         {
             document.getElementById("submitForm").reset();
             if(returndata.success){
-            $('#myModal4').modal('toggle');
-            toastr.success(returndata.success);
-            location.reload();
+                $('#myModal4').modal('toggle');
+                toastr.success(returndata.success);
+                window.location.href = "{{ url('/home') }}";
             }
             else{
             toastr.error(returndata.error);

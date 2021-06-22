@@ -95,7 +95,7 @@ class BookServiceController extends Controller
     public function searchAvailableDate(Request $request)
     {
         if(request()->ajax()) {
-            $availableDate1 = DB::table('available_dates')->where('status', 'Available');
+            $availableDate1 = DB::table('available_dates')->where('service_id', $request->service_id)->where('status', 'Available');
             if(!empty($request->start_date)){
                 $availableDate1 = $availableDate1->where('available_date', '>=', $request->start_date);
             }
@@ -103,61 +103,45 @@ class BookServiceController extends Controller
             {
                 $availableDate1 = $availableDate1->where('available_date', '<=', $request->end_date);
             }
-            if(!empty($request->start_time))
-            {
-                $payment1 = $payment1->where('student_id', $request->student);
-            }
-            if(!empty($request->date_from) && !empty($request->date_to)){
-                $payment1 = $payment1->whereBetween('payment_date', [date("Y-m-d", strtotime($request->date_from)), date("Y-m-d", strtotime($request->date_to))]);
-            }
-            $payment = $payment1->orderBy('id', 'DESC')->get();
-            return datatables()->of($payment)
-            ->addColumn('student_name', function($row){    
-                $student = Student::where('id', $row->student_id)->first();
-                if(!empty($student))
+            $availableDate = $availableDate1->orderBy('id', 'DESC')->get();
+            return datatables()->of($availableDate)
+            ->addColumn('available_time', function($row){  
+                $availableTime = DB::table('service_time_slots')->where('available_date_id', $row->id)->where('time_status', 'Available')->get();  
+                $output = '';
+                $output .= '<ul>';
+                foreach($availableTime as $a)
                 {
-                    return $student->student_name;
-                }                                                                                                                                                                                                                                                                                              
+                    $output .= '<li>Start Time:- '.date('h:i A', strtotime($a->from_time)).' End Time:- '.date('h:i A', strtotime($a->to_time)).'</li>';
+                }
+                $output .= '</ul>';
+                return $output;
             })
-            ->addColumn('class', function($row){    
-                $student = Student::where('id', $row->student_id)->first();
-                if(!empty($student))
-                {
-                    $class = Classes::where('id', $student->class_id)->first();
-                    if(!empty($class))
-                    {
-                        return $class->class_name;
-                    }
-                }                                                                                                                                                                                                                                                                                              
+            ->addColumn('duration', function($row){    
+                return 'duration';                                                                                                                                                                                                                                                                                         
+            }) 
+            ->addColumn('action', function($row){
+                return '<button type="button" class="btn bg-red waves-effect" onclick="ServiceModel(this, '.$row->id.')">Book Now</button>';
             })
-            ->addColumn('section', function($row){    
-                $student = Student::where('id', $row->student_id)->first();
-                if(!empty($student))
-                {
-                    $section = Section::where('id', $student->section_id)->first();
-                    if(!empty($section))
-                    {
-                        return $section->section_name;
-                    }
-                }                                                                                                                                                                                                                                                                                              
-            })
-            ->addColumn('roll_no', function($row){    
-                $student = Student::where('id', $row->student_id)->first();
-                if(!empty($student))
-                {
-                   return $student->roll_no;
-                }                                                                                                                                                                                                                                                                                              
-            })
-            ->addColumn('payment_method_no', function($row){    
-                if($row->payment_method_no != null)
-                {
-                    return $row->payment_method_no;
-                }                                                                                                                                                                                                                                                                                             
-            })
-            ->addColumn('action', 'admin.payment.action')
-            ->rawColumns(['student_name', 'action', 'payment_method_no'])
+            ->rawColumns(['available_date', 'action', 'available_time'])
             ->addIndexColumn()
             ->make(true);
         }
+    }
+
+    public function getBookService(Request $request)
+    {
+        $availableDate = DB::table('available_dates')->where('id', $request->bid)->first();
+        $timeSlot = DB::table('service_time_slots')->where('available_date_id', $availableDate->id)->get();
+        $output = '';
+        foreach($timeSlot as $t)
+        {
+            $output .= '<tr>'.
+                '<td>'.date('h:i A', strtotime($t->from_time)).'</td>'.
+                '<td>'.date('h:i A', strtotime($t->to_time)).'</td>'. 
+                '<td><input type="checkbox" name="time_slot" class="filled-in" data-id="'.$t->id.'"></td>'.
+            '</tr>';
+        }
+        $data = array('time_slot' => $output, 'available_date_id' => $availableDate->id, 'available_date' => $availableDate->available_date);
+        echo json_encode($data);
     }
 }

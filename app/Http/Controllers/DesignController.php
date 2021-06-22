@@ -260,7 +260,8 @@ class DesignController extends Controller
                                 <div class="info-product-price">
                                     <span class="item_price">&#8377;'.$row->service_cost.'</span>
                                 </div>';
-                                    if (Route::has('login')){
+                                
+                                    if(Route::has('submit-login-form')){
                                         $output .= '<a href="#" data-toggle="modal" data-target="#myModal4"><button class="item_add single-item hvr-outline-out button2">Book</button></a>';
                                     }
                                     else{

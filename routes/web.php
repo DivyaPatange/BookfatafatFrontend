@@ -102,6 +102,7 @@ Route::get('/placed-order', [OrderController::class, 'placedOrderDetails']);
 Route::get('/payment-details', [OrderController::class, 'userPaymentDetails']);
 Route::resource('/book-service', BookServiceController::class);
 Route::get('/search-available-date', [BookServiceController::class, 'searchAvailableDate'])->name('search.available-date');
+Route::post('get-book-service', [BookServiceController::class, 'getBookService'])->name('get-book-service');
 
 Route::get('/services', [DesignController::class, 'allServices']);
 Route::post('filter-service', [DesignController::class, 'filterService'])->name('filter.service');
