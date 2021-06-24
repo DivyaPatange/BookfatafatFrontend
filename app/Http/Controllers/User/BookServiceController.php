@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Vendor\Service;
 use DB;
+use DateTime;
+use App\Models\User\BookService;
 
 class BookServiceController extends Controller
 {
@@ -43,7 +45,13 @@ class BookServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $timeSlot = $request->time_slot;
+        $explodeSlot = explode(",", $timeSlot);
+        for($i=0; $i < count($explodeSlot); $i++)
+        {
+            $bookService = new BookService();
+            $bookService->user_id = 
+        }
     }
 
     /**
@@ -117,12 +125,27 @@ class BookServiceController extends Controller
                 return $output;
             })
             ->addColumn('duration', function($row){    
-                return 'duration';                                                                                                                                                                                                                                                                                         
+                $availableTime = DB::table('service_time_slots')->where('available_date_id', $row->id)->where('time_status', 'Available')->get();  
+                $output = '';
+                $output .= '<ul>';
+                foreach($availableTime as $a)
+                {
+                    $date1 = date("Y-m-d h:i:s A", strtotime($row->available_date.' '.$a->from_time));
+                    $date2 = date("Y-m-d h:i:s A", strtotime($row->available_date.' '.$a->to_time));
+                    $datetime1 = new DateTime($date1);
+                    // return $datetime1;
+                    $datetime2 = new DateTime($date2);
+                    $interval = $datetime1->diff($datetime2);
+                    $interval->format('%h')." Hours ".$interval->format('%i')." Minutes";
+                    $output .= '<li>'.$interval->format('%h')." Hours ".$interval->format('%i')." Minutes".'</li>';
+                }
+                $output .= '</ul>';
+                return $output;                                                                                                                                                                                                                                                                                      
             }) 
             ->addColumn('action', function($row){
                 return '<button type="button" class="btn bg-red waves-effect" onclick="ServiceModel(this, '.$row->id.')">Book Now</button>';
             })
-            ->rawColumns(['available_date', 'action', 'available_time'])
+            ->rawColumns(['available_date', 'action', 'available_time', 'duration'])
             ->addIndexColumn()
             ->make(true);
         }
@@ -138,7 +161,7 @@ class BookServiceController extends Controller
             $output .= '<tr>'.
                 '<td>'.date('h:i A', strtotime($t->from_time)).'</td>'.
                 '<td>'.date('h:i A', strtotime($t->to_time)).'</td>'. 
-                '<td><input type="checkbox" name="time_slot" class="filled-in" data-id="'.$t->id.'"></td>'.
+                '<td><div class="demo-checkbox"><input type="checkbox" name="time_slot[]" class="filled-in" value="'.$t->id.'"></div></td>'.
             '</tr>';
         }
         $data = array('time_slot' => $output, 'available_date_id' => $availableDate->id, 'available_date' => $availableDate->available_date);

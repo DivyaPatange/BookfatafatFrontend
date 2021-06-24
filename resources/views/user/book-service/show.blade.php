@@ -95,8 +95,8 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <form>
+    <form method="POST">
+        <div class="modal-body">
             <div class="form-group">
                 <div class="form-line">
                     <label for="">Available Date</label>
@@ -119,12 +119,13 @@
                     </div>
                 </div>
             </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <input type="hidden" name="available_date_id" id="available_date_id" value="">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
+        </div>
+        <div class="modal-footer">
+            <input type="hidden" name="available_date_id" id="available_date_id" value="">
+            <button type="button" class="btn bg-red waves-effect" id="book">Book Now</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+    </form>
     </div>
   </div>
 </div>
@@ -216,5 +217,26 @@ function ServiceModel(obj,bid)
     }
   });
 }
+
+$('body').on('click', '#book', function () {
+    var available_date = $("#available_date").val();
+    var time_slot = $("#serviceDiv input:checkbox:checked").map(function(){
+      return $(this).val();
+    }).get();
+    var available_date_id = $("#available_date_id").val();
+    $.ajax({
+    type:"POST",
+    url:"{{ route('book-service.store') }}",
+    data:{available_date:available_date, time_slot:time_slot, available_date_id:available_date_id},
+    cache:false,        
+    success:function(returndata)
+    {
+        $("#serviceModal").modal('hide');
+        var oTable = $('.js-basic-example').dataTable(); 
+        oTable.fnDraw(false);
+        toastr.success(returndata.success);
+    }
+  });
+})
 </script>
 @endsection

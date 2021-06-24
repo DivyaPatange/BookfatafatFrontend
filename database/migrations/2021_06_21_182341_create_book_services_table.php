@@ -17,7 +17,7 @@ class CreateBookServicesTable extends Migration
             $table->id();
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedInteger('approved_by');
+            $table->unsignedInteger('approved_by')->nullable();
             $table->foreign('approved_by')->references('id')->on('vendors');
             $table->date('start_date');
             $table->date('end_date');

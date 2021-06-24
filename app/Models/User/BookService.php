@@ -11,5 +11,5 @@ class BookService extends Model
 
     protected $table = "book_services";
 
-    protected $fillable = ['user_id', 'approved_by', 'start_date', 'end_date', 'start_time', 'end_time', 'duration', 'booking_status'];
+    protected $fillable = ['user_id', 'approved_by', 'start_date', 'end_date', 'start_time', 'end_time', 'duration', 'booking_status', 'vendor_id', 'service_id'];
 }
