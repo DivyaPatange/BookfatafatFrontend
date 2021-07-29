@@ -12,6 +12,7 @@ use App\Models\Admin\Product;
 use App\Models\User;
 use App\Models\Payment;
 use App\Models\User\UserInfo;
+use PDF;
 
 class OrderController extends Controller
 {
@@ -48,6 +49,7 @@ class OrderController extends Controller
                 $product = Product::where('product_name', $item->name)->first();
     
                 $orderItem = new OrderItem([
+                    'vendor_id'     =>  $product->vendor_id,
                     'product_id'    =>  $product->id,
                     'quantity'      =>  $item->quantity,
                     'price'         =>  $item->getPriceSum()
@@ -204,6 +206,17 @@ class OrderController extends Controller
     public function paymentSuccess(Request $request)
     {
         $order = Order::where('order_number', $request->order_id)->first();
+        $paymentId = DB::table('payments')->max('invoice_no');      
+        if(!empty($paymentId))
+        {
+            
+            $en=$paymentId+1;
+            $invoice_no = sprintf("%03d", $en);
+        }
+        else{
+            $en = 1;
+            $invoice_no = sprintf("%03d", $en);
+        }
         $payment = new Payment();
         $payment->order_id = $order->id;
         $payment->name = $request->name;
@@ -213,8 +226,20 @@ class OrderController extends Controller
         $payment->payment_channel = $request->payment_channel;
         $payment->payment_datetime = $request->payment_datetime;
         $payment->response_message = $request->response_message;
+        $payment->invoice_no = $invoice_no;
         $payment->save();
 
+        $lastPayment = DB::table('payments')->where('id', $payment->id)->first();
+        $folderPath = public_path('Invoice/');
+        $paymentArray = (array)$lastPayment;
+        // dd($paymentArray);
+        $pdf = PDF::loadView('user.invoice', $paymentArray)->setOptions(['defaultFont' => 'sans-serif']);
+        $fileName = uniqid() . '.pdf';
+
+        $file = $folderPath . $fileName;
+        $path = file_put_contents($file, $pdf->output());
+        $pdfFile = public_path('Invoice/'.$fileName);
+        $updateInvoice = Payment::where('id', $payment->id)->update(['invoice_file' => $fileName]);
         return redirect()->route('payment-success', $payment->id);
     }
 

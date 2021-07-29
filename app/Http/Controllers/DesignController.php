@@ -304,4 +304,9 @@ class DesignController extends Controller
               
         }
     }
+
+    public function invoice()
+    {
+        return view('user.invoice');
+    }
 }

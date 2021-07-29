@@ -13,32 +13,38 @@
             </div>
             <div class="body">
                 <div class="row clearfix">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <p><b>Transaction ID</b></p>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-8">
                         <p>: {{ $paymentDetail->transaction_id }}</p>
                     </div>
-                    <div class="col-md-3">
-                        <p><b>Paid Amount :</b></p>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4">
+                        <p><b>Paid Amount</b></p>
                     </div>
                     <?php
                         $order = DB::table('orders')->where('id', $paymentDetail->order_id)->first();
                     ?>
-                    <div class="col-md-9">
-                        <p>@if(!empty($order)){{ $order->grand_total }} @endif</p>
+                    <div class="col-md-8">
+                        <p>: @if(!empty($order)){{ $order->grand_total }} @endif</p>
                     </div>
-                    <div class="col-md-3">
-                        <p><b>Payment Date :</b></p>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4">
+                        <p><b>Payment Date</b></p>
                     </div>
-                    <div class="col-md-9">
-                        <p>{{ date('d-m-Y', strtotime($paymentDetail->created_at)) }}</p>
+                    <div class="col-md-8">
+                        <p>: {{ date('d-m-Y', strtotime($paymentDetail->created_at)) }}</p>
                     </div>
-                    <div class="col-md-3">
-                        <p><b>Payment Mode :</b></p>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4">
+                        <p><b>Payment Mode</b></p>
                     </div>
-                    <div class="col-md-9">
-                        <p>{{ $paymentDetail->payment_mode }}</p>
+                    <div class="col-md-8">
+                        <p>: {{ $paymentDetail->payment_mode }}</p>
                     </div>
                 </div>
             </div>

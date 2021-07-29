@@ -106,6 +106,7 @@ Route::post('get-book-service', [BookServiceController::class, 'getBookService']
 
 Route::get('/services', [DesignController::class, 'allServices']);
 Route::post('filter-service', [DesignController::class, 'filterService'])->name('filter.service');
+Route::get('/invoice', [DesignController::class, 'invoice']);
 
 
 // Route::prefix('admin')->name('admin.')->group(function() {

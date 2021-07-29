@@ -50,7 +50,7 @@ class BookServiceController extends Controller
         for($i=0; $i < count($explodeSlot); $i++)
         {
             $bookService = new BookService();
-            $bookService->user_id = 
+            // $bookService->user_id = 
         }
     }
 
