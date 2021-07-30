@@ -78,6 +78,8 @@ Route::get('/seed', function () {
     return 'DONE'; //Return anything
 });
 
+
+Route::get('/invoices', [DesignController::class, 'invoice']);
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 Route::post('/submit-login-form', [LoginController::class, 'submitLoginForm'])->name('submit-login-form');
@@ -106,43 +108,11 @@ Route::post('get-book-service', [BookServiceController::class, 'getBookService']
 
 Route::get('/services', [DesignController::class, 'allServices']);
 Route::post('filter-service', [DesignController::class, 'filterService'])->name('filter.service');
-Route::get('/invoice', [DesignController::class, 'invoice']);
 
 
-// Route::prefix('admin')->name('admin.')->group(function() {
-//     // Admin Authentication Route
-//     Route::get('/login', [AdminLoginController::class, 'showLoginForm'])->name('login');
-//     Route::post('/login', [AdminLoginController::class, 'login'])->name('login.submit');
-//     Route::get('/', [AdminController::class, 'index'])->name('dashboard');
-//     Route::get('/logout', [AdminLoginController::class, 'logout'])->name('logout');
-//     Route::resource('/vendors', VendorController::class);
-//     Route::resource('/services', App\Http\Controllers\Admin\ServiceController::class);
-//     Route::resource('categories', CategoryController::class);
-//     Route::post('/get-category', [CategoryController::class, 'getCategory'])->name('get.category');
-//     Route::post('/category/update', [CategoryController::class, 'updateCategory']);
-//     Route::resource('/sub-category', SubCategoryController::class);
-//     Route::post('/get-sub-category', [SubCategoryController::class, 'getSubCategory'])->name('get.sub-category');
-//     Route::post('/sub-category/update', [SubCategoryController::class, 'updateSubCategory']);
-//     Route::resource('/products', App\Http\Controllers\Admin\ProductController::class);
-//     Route::get('/get-category-list', [App\Http\Controllers\Admin\ProductController::class, 'getCategoryList']);
-// });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Route::prefix('vendors')->name('vendor.')->group(function() {
-//     // Admin Authentication Route
-//     Route::get('/login', [VendorLoginController::class, 'showLoginForm'])->name('login');
-//     Route::post('/login', [VendorLoginController::class, 'login'])->name('login.submit');
-//     Route::get('/register', [VendorRegisterController::class, 'showRegisterForm'])->name('register');
-//     Route::post('/register', [VendorRegisterController::class, 'register'])->name('register.submit');
-//     Route::get('/', [App\Http\Controllers\Auth\VendorController::class, 'index'])->name('dashboard');
-//     Route::get('/logout', [VendorLoginController::class, 'logout'])->name('logout');
-//     Route::resource('product', ProductController::class);
-//     Route::get('/get-sub-category-list', [ProductController::class, 'getSubCategoryList']);
-//     Route::resource('/service', ServiceController::class);
-//     Route::post('/available-date/store', [ServiceController::class, 'storeAvailableDate'])->name('available-date.store');
-//     Route::get('/get-date/{id}', [ServiceController::class, 'getDate'])->name('service.getDate');
-//     Route::delete('/available-date/{id}', [ServiceController::class, 'deleteAvailableDate']);
-// });
+

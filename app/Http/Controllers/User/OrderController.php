@@ -229,11 +229,21 @@ class OrderController extends Controller
         $payment->invoice_no = $invoice_no;
         $payment->save();
 
+        if($request->response_message == "Transaction successful")
+        {
+            $message = "Completed";
+        }
+        else{
+            $message = "Pending";
+        }
+
+        $order = Order::where('order_number', $request->order_id)->update(['payment_status' => $message]);
+
         $lastPayment = DB::table('payments')->where('id', $payment->id)->first();
         $folderPath = public_path('Invoice/');
         $paymentArray = (array)$lastPayment;
-        // dd($paymentArray);
-        $pdf = PDF::loadView('user.invoice', $paymentArray)->setOptions(['defaultFont' => 'sans-serif']);
+ 
+        $pdf = PDF::loadView('user.invoice', $paymentArray)->setPaper('a4', 'landscape');
         $fileName = uniqid() . '.pdf';
 
         $file = $folderPath . $fileName;
@@ -285,7 +295,11 @@ class OrderController extends Controller
             ->addColumn('payment_date', function($row){
                 return date('d-m-Y', strtotime($row->payment_datetime));
             })
-            ->rawColumns(['payment_date'])
+            ->addColumn('invoice_file', function($row){
+                $filePath = asset('Invoice/'.$row->invoice_file);
+                return '<a target="_blank" href="'.$filePath.'"><i class="material-icons">insert_drive_file</i></a>';
+            })
+            ->rawColumns(['payment_date', 'invoice_file'])
             ->addIndexColumn()
             ->make(true);
         }

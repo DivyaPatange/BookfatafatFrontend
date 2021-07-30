@@ -1,128 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bookfatafat - Invoice</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="{{ public_path('invoiceAsset/bootstrap.min.css') }}" rel="stylesheet">
-  <!-- Jquery Core Js -->
- <script src="{{ public_path('invoiceAsset/jquery.min.js') }}"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookfatafat - Invoice</title>
+    <style>
+        @page { margin: 0px; }
+        body{
+            background-color: #F6F6F6; 
+            margin: 0;
+            padding: 0;
+        }
+        h1,h2,h3,h4,h5,h6{
+            margin: 0;
+            padding: 0;
+        }
+        p{
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            width: 80%;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .brand-section{
+           background-color: #0d1033;
+           padding: 10px 40px;
+        }
+        .logo{
+            width: 50%;
+        }
 
-<!-- Bootstrap Core Js -->
-<script src="{{ public_path('invoiceAsset/bootstrap.min.js') }}"></script>
-<style>
-.body-main {
-    background: #ffffff;
-    border-bottom: 15px solid #1E1F23;
-    border-top: 15px solid #1E1F23;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    padding: 40px 30px !important;
-    position: relative;
-    box-shadow: 0 1px 21px #808080;
-    font-size: 10px
-}
-
-.main thead {
-    background: #1E1F23;
-    color: #fff
-}
-.img {
-    height: 100px
-}
-h1 {
-    text-align: center
-}
-</style>
+        .row{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .col-6{
+            width: 50%;
+            flex: 0 0 auto;
+        }
+        .text-white{
+            color: #fff;
+        }
+        .text-left{
+            text-align:left;
+        }
+        .company-details{
+            /* float: right; */
+            text-align: right;
+        }
+        .body-section{
+            padding: 16px;
+            border: 1px solid gray;
+        }
+        .heading{
+            font-size: 20px;
+            margin-bottom: 08px;
+            text-align:left;
+        }
+        .sub-heading{
+            color: #262626;
+            margin-bottom: 05px;
+            text-align:left;
+        }
+        table{
+            background-color: #fff;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table thead tr{
+            border: 1px solid #111;
+            background-color: #f2f2f2;
+        }
+        table td {
+            vertical-align: middle !important;
+            text-align: center;
+        }
+        table th, table td {
+            padding-top: 08px;
+            padding-bottom: 08px;
+        }
+        .table-bordered{
+            box-shadow: 0px 0px 5px 0.5px gray;
+        }
+        .table-bordered td, .table-bordered th {
+            border: 1px solid #dee2e6;
+        }
+        .text-right{
+            text-align: end;
+        }
+        .w-20{
+            width: 20%;
+        }
+        .float-right{
+            float: right;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
+
     <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3 body-main">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-4"> <img class="img" alt="Invoce Template" src="{{ public_path('frontasset/images/122 (1).png') }}" /> </div>
-                        <div class="col-md-8 text-right">
-                            <h4 style="color: #F81D2D;"><strong>Bookfatafat</strong></h4>
-                            <p>221 ,Baker Street</p>
-                            <p>1800-234-124</p>
-                            <p>example@gmail.com</p>
+        <div class="brand-section">
+            <table width="100%" style="background-color:transparent;">
+                <tr>
+                    <td>
+                        <h1 class="text-white text-left">Bookfatafat</h1>
+                    </td>
+                    <td>
+                        <div class="company-details">
+                            <p class="text-white">bookfatafat.com</p>
+                            <p class="text-white">12K Street, 45 Building Road</p>
+                            <p class="text-white">+91 888555XXXX</p>
                         </div>
-                    </div> <br />
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            <h2>INVOICE</h2>
-                            <h5>{{ $invoice_no }}</h5>
-                        </div>
-                    </div> <br />
-                    <div>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        <h5>Product Name</h5>
-                                    </th>
-                                    <th>
-                                        <h5>Quantity</h5>
-                                    </th>
-                                    <th>
-                                        <h5>Amount</h5>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="col-md-6">Samsung Galaxy 8 64 GB</td>
-                                    <td class="col-md-3">1</td>
-                                    <td class="col-md-3"><i class="" area-hidden="true"></i> 50,000 </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-6">JBL Bluetooth Speaker</td>
-                                    <td class="col-md-3">1</td>
-                                    <td class="col-md-3"><i class="" area-hidden="true"></i> 5,200 </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-6">Apple Iphone 6s 16GB</td>
-                                    <td class="col-md-3">1</td>
-                                    <td class="col-md-3"><i class="" area-hidden="true"></i> 25,000 </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-6">MI Smartwatch 2</td>
-                                    <td class="col-md-3">1</td>
-                                    <td class="col-md-3"><i class="" area-hidden="true"></i> 2,200 </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-right" colspan="2">
-                                        <p> <strong>Total Amount: </strong> </p>
-                                        <p> <strong>Payable Amount: </strong> </p>
-                                    </td>
-                                    <td class="col-md-3">
-                                        <p> <strong><i class="" area-hidden="true"></i> 82,900</strong> </p>
-                                        <p> <strong><i class="" area-hidden="true"></i> 79,900</strong> </p>
-                                    </td>
-                                </tr>
-                                <tr style="color: #F81D2D;">
-                                    <td class="text-right" colspan="2">
-                                        <h4><strong>Total:</strong></h4>
-                                    </td>
-                                    <td class="text-left col-md-3">
-                                        <h4><strong><i class="" area-hidden="true"></i> 79,900 </strong></h4>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                        <div class="col-md-12">
-                            <p><b>Date :</b> 6 June 2019</p> <br />
-                            <p><b>Signature</b></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    </td>
+                </tr>
+            </table>
         </div>
-    </div>
-</div>
+
+        <div class="body-section">
+            <?php 
+                $order = DB::table('orders')->where('id', $order_id)->first();
+                if(!empty($order)){
+                    $userInfo = DB::table('user_infos')->where('user_id', $order->user_id)->first();
+                }
+            ?>
+            <table width="table" style="background-color:transparent;">
+                <tr>
+                    <td>
+                        <h2 class="heading">Invoice No.: {{ $invoice_no }}</h2>
+                        <p class="sub-heading">Transaction No. {{ $transaction_id }} </p>
+                        <p class="sub-heading">Order Date: @if(!empty($order)){{ date('d-m-Y', strtotime($order->created_at)) }} @endif</p>
+                        <p class="sub-heading">Email Address: {{ $email }} </p>
+                    </td>
+                    <td>
+                        <p class="sub-heading">Full Name: {{ $name }} </p>
+                        <p class="sub-heading">Address: @if(!empty($order)) @if(!empty($userInfo)) {{ $userInfo->address }} @endif @endif</p>
+                        <p class="sub-heading">City: @if(!empty($order)) @if(!empty($userInfo)) {{ $userInfo->city }} @endif @endif </p>
+                        <p class="sub-heading">Pincode: @if(!empty($order)) @if(!empty($userInfo)) {{ $userInfo->pin_code }} @endif @endif</p>
+                        <p class="sub-heading">Phone Number: @if(!empty($order)) {{ $order->mobile_no }} @endif </p>
+                    </td>
+                </tr>
+            </table>
+            <!-- <div class="row">
+                <div class="col-6">
+                    
+                </div>
+                <div class="col-6">
+                    
+                </div>
+            </div> -->
+        </div>
+
+        <div class="body-section">
+            <h3 class="heading">Ordered Items</h3>
+            <br>
+            <?php 
+                $orderItems = DB::table('order_items')->where('order_id', $order_id)->get();
+            ?>
+            <table class="table-bordered">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th class="w-20">Price</th>
+                        <th class="w-20">Quantity</th>
+                        <th class="w-20">Grandtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($orderItems as $orderItem)
+                    <?php
+                        $product = DB::table('products')->where('id', $orderItem->product_id)->first();
+                        $total = $orderItem->quantity * $orderItem->price;
+                    ?>
+                    <tr>
+                        <td>@if(!empty($product)) {{ $product->product_name }} @endif</td>
+                        <td>INR {{ $orderItem->price }}</td>
+                        <td>{{ $orderItem->quantity }}</td>
+                        <td>INR {{ $total }}</td>
+                    </tr>
+                    @endforeach
+                    <tr>
+                        <td colspan="3" class="text-right">Sub Total</td>
+                        <td>INR @if(!empty($order)) {{ $order->grand_total }} @endif</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="text-right">Grand Total</td>
+                        <td>INR @if(!empty($order)) {{ $order->grand_total }} @endif</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <h3 class="heading">Payment Status: Paid</h3>
+            <h3 class="heading">Payment Mode: {{ $payment_mode }}</h3>
+        </div>
+
+        <div class="body-section">
+            <p>&copy; Copyright {{ date('Y') }} - Bookfatafat. All rights reserved. 
+                <a href="https://bookfatafat.com/" class="float-right">www.bookfatafat.com</a>
+            </p>
+        </div>      
+    </div>      
+
 </body>
 </html>

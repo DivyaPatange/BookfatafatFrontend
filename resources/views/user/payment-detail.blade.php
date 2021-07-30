@@ -56,6 +56,7 @@ tr.shown td.details-control:before{
                                 <th>Payment Mode</th>
                                 <th>Payment Channel</th>
                                 <th>Payment Date</th>
+                                <th>Invoice</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -65,6 +66,7 @@ tr.shown td.details-control:before{
                                 <th>Payment Mode</th>
                                 <th>Payment Channel</th>
                                 <th>Payment Date</th>
+                                <th>Invoice</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -110,13 +112,13 @@ $(document).ready(function() {
             // alert(data);
         },
         columns: [
-                {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false,searchable: false},
-                { data: 'transaction_id', name: 'transaction_id' },
-                { data: 'payment_mode', name: 'payment_mode' },
-                { data: 'payment_channel', name: 'payment_channel' },
-                { data: 'payment_date', name: 'payment_date' },
-
-            ],
+            {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false,searchable: false},
+            { data: 'transaction_id', name: 'transaction_id' },
+            { data: 'payment_mode', name: 'payment_mode' },
+            { data: 'payment_channel', name: 'payment_channel' },
+            { data: 'payment_date', name: 'payment_date' },
+            { data: 'invoice_file', name: 'invoice_file' },
+        ],
         order: [[0, 'desc']]
     });
 })

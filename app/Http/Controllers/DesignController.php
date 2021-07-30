@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Models\Admin\Product;
 use Route;
+use PDF;
 
 class DesignController extends Controller
 {
@@ -307,6 +308,15 @@ class DesignController extends Controller
 
     public function invoice()
     {
+        $folderPath = public_path('Invoice/');
+        // $paymentArray = (array)$lastPayment;
+        // dd($paymentArray);
+        $pdf = PDF::loadView('user.invoice')->setPaper('a4', 'landscape');
+        $fileName = uniqid() . '.pdf';
+
+        $file = $folderPath . $fileName;
+        $path = file_put_contents($file, $pdf->output());
+        $pdfFile = public_path('Invoice/'.$fileName);
         return view('user.invoice');
     }
 }
