@@ -25,7 +25,7 @@ class OrderController extends Controller
     {
         $user = DB::table('users')->where('id', Auth::user()->id)->first();
         // dd($user);
-        $total = \Cart::getSubTotal() + 49;
+        $total = \Cart::getSubTotal();
         // dd($total);
         $order = Order::create([
             'order_number'      =>  'ORD-'.strtoupper(uniqid()),
@@ -33,7 +33,7 @@ class OrderController extends Controller
             'status'            =>  'pending',
             'grand_total'       =>  $total,
             'item_count'        =>  \Cart::getTotalQuantity(),
-            'payment_status'    =>  0,
+            'payment_status'    =>  "Pending",
             'name'        =>  auth()->user()->name,
             'mobile_no'      =>  $user->mobile_no,
         ]);

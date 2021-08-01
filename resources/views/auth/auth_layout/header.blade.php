@@ -1,3 +1,4 @@
+
 <!-- header -->
 <div class="header">
 	<div class="container">
@@ -65,7 +66,7 @@
 
 <!-- banner -->
 <div class="ban-top">
-	<div class="container-fluid">
+	<div class="container">
 		<div class="top_nav_left">
 			<nav class="navbar navbar-default">
 			  <div class="container-fluid">
@@ -81,82 +82,84 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
 				  <ul class="nav navbar-nav menu__list">
-					<li class="active menu__item menu__item--current"><a class="menu__link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a></li>
-					<li class="dropdown menu__item">
-						<a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">men's wear <span class="caret"></span></a>
-							<ul class="dropdown-menu multi-column columns-3">
-								<div class="row">
-									<div class="col-sm-6 multi-gd-img1 multi-gd-text ">
-										<a href="mens.php"><img src="{{ asset('frontasset/images/woo1.jpg') }}" alt=" "/></a>
-									</div>
-									<div class="col-sm-3 multi-gd-img">
-										<ul class="multi-column-dropdown">
-											<li><a href="{{ url('/clothing') }}">Clothing</a></li>
-											<li><a href="mens.php">Wallets</a></li>
-											<li><a href="mens">Footwear</a></li>
-											<li><a href="mens">Watches</a></li>
-											<li><a href="mens">Accessories</a></li>
-											<li><a href="mens">Bags</a></li>
-											<li><a href="mens">Caps & Hats</a></li>
-										</ul>
-									</div>
-									<div class="col-sm-3 multi-gd-img">
-										<ul class="multi-column-dropdown">
-											<li><a href="mens">Jewellery</a></li>
-											<li><a href="mens">Sunglasses</a></li>
-											<li><a href="mens">Perfumes</a></li>
-											<li><a href="mens">Beauty</a></li>
-											<li><a href="mens">Shirts</a></li>
-											<li><a href="mens">Sunglasses</a></li>
-											<li><a href="mens">Swimwear</a></li>
-										</ul>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</ul>
-					</li>
-					<li class="dropdown menu__item">
-						<a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">women's wear <span class="caret"></span></a>
-							<ul class="dropdown-menu multi-column columns-3">
-								<div class="row">
-									<div class="col-sm-3 multi-gd-img">
-										<ul class="multi-column-dropdown">
-											<li><a href="{{ url('womens') }}">Clothing</a></li>
-											<li><a href="womens">Wallets</a></li>
-											<li><a href="womens">Footwear</a></li>
-											<li><a href="womens">Watches</a></li>
-											<li><a href="womens">Accessories</a></li>
-											<li><a href="womens">Bags</a></li>
-											<li><a href="womens">Caps & Hats</a></li>
-										</ul>
-									</div>
-									<div class="col-sm-3 multi-gd-img">
-										<ul class="multi-column-dropdown">
-											<li><a href="womens">Jewellery</a></li>
-											<li><a href="womens">Sunglasses</a></li>
-											<li><a href="womens">Perfumes</a></li>
-											<li><a href="womens">Beauty</a></li>
-											<li><a href="womens">Shirts</a></li>
-											<li><a href="womens">Sunglasses</a></li>
-											<li><a href="womens">Swimwear</a></li>
-										</ul>
-									</div>
-									<div class="col-sm-6 multi-gd-img multi-gd-text ">
-										<a href="{{ url('womens')}}"><img src="{{ asset('frontasset/images/woo.jpg') }}" alt=" "/></a>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</ul>
-					</li>
-					<li class=" menu__item"><a class="menu__link" href="{{ url('electronics') }}">Electronics</a></li>
+					<!--<li class="active menu__item menu__item--current"><a class="menu__link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a></li>-->
+					<!--<li class="dropdown menu__item">-->
+					<!--	<a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">men's wear <span class="caret"></span></a>-->
+					<!--		<ul class="dropdown-menu multi-column columns-3">-->
+					<!--			<div class="row">-->
+					<!--				<div class="col-sm-6 multi-gd-img1 multi-gd-text ">-->
+					<!--					<a href="mens.php"><img src="{{ asset('frontasset/images/woo1.jpg') }}" alt=" "/></a>-->
+					<!--				</div>-->
+					<!--				<div class="col-sm-3 multi-gd-img">-->
+					<!--					<ul class="multi-column-dropdown">-->
+					<!--						<li><a href="{{ url('/clothing') }}">Clothing</a></li>-->
+					<!--						<li><a href="mens.php">Wallets</a></li>-->
+					<!--						<li><a href="mens">Footwear</a></li>-->
+					<!--						<li><a href="mens">Watches</a></li>-->
+					<!--						<li><a href="mens">Accessories</a></li>-->
+					<!--						<li><a href="mens">Bags</a></li>-->
+					<!--						<li><a href="mens">Caps & Hats</a></li>-->
+					<!--					</ul>-->
+					<!--				</div>-->
+					<!--				<div class="col-sm-3 multi-gd-img">-->
+					<!--					<ul class="multi-column-dropdown">-->
+					<!--						<li><a href="mens">Jewellery</a></li>-->
+					<!--						<li><a href="mens">Sunglasses</a></li>-->
+					<!--						<li><a href="mens">Perfumes</a></li>-->
+					<!--						<li><a href="mens">Beauty</a></li>-->
+					<!--						<li><a href="mens">Shirts</a></li>-->
+					<!--						<li><a href="mens">Sunglasses</a></li>-->
+					<!--						<li><a href="mens">Swimwear</a></li>-->
+					<!--					</ul>-->
+					<!--				</div>-->
+					<!--				<div class="clearfix"></div>-->
+					<!--			</div>-->
+					<!--		</ul>-->
+					<!--</li>-->
+					<!--<li class="dropdown menu__item">-->
+					<!--	<a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">women's wear <span class="caret"></span></a>-->
+					<!--		<ul class="dropdown-menu multi-column columns-3">-->
+					<!--			<div class="row">-->
+					<!--				<div class="col-sm-3 multi-gd-img">-->
+					<!--					<ul class="multi-column-dropdown">-->
+					<!--						<li><a href="{{ url('womens') }}">Clothing</a></li>-->
+					<!--						<li><a href="womens">Wallets</a></li>-->
+					<!--						<li><a href="womens">Footwear</a></li>-->
+					<!--						<li><a href="womens">Watches</a></li>-->
+					<!--						<li><a href="womens">Accessories</a></li>-->
+					<!--						<li><a href="womens">Bags</a></li>-->
+					<!--						<li><a href="womens">Caps & Hats</a></li>-->
+					<!--					</ul>-->
+					<!--				</div>-->
+					<!--				<div class="col-sm-3 multi-gd-img">-->
+					<!--					<ul class="multi-column-dropdown">-->
+					<!--						<li><a href="womens">Jewellery</a></li>-->
+					<!--						<li><a href="womens">Sunglasses</a></li>-->
+					<!--						<li><a href="womens">Perfumes</a></li>-->
+					<!--						<li><a href="womens">Beauty</a></li>-->
+					<!--						<li><a href="womens">Shirts</a></li>-->
+					<!--						<li><a href="womens">Sunglasses</a></li>-->
+					<!--						<li><a href="womens">Swimwear</a></li>-->
+					<!--					</ul>-->
+					<!--				</div>-->
+					<!--				<div class="col-sm-6 multi-gd-img multi-gd-text ">-->
+					<!--					<a href="{{ url('womens')}}"><img src="{{ asset('frontasset/images/woo.jpg') }}" alt=" "/></a>-->
+					<!--				</div>-->
+					<!--				<div class="clearfix"></div>-->
+					<!--			</div>-->
+					<!--		</ul>-->
+					<!--</li>-->
+					<!--<li class=" menu__item"><a class="menu__link" href="{{ url('electronics') }}">Electronics</a></li>-->
 					<li class=" menu__item"><a class="menu__link" href="{{ url('products') }}">Products</a></li>
 					<li class=" menu__item"><a class="menu__link" href="{{ url('services') }}">Services</a></li>
+
 					<li class=" menu__item"><a class="menu__link" href="{{ url('contact') }}">contact</a></li>
 				  </ul>
 				</div>
 			  </div>
 			</nav>	
 		</div>
+	
 		<div class="top_nav_right">
 			<div class="cart box_1">
 				<a href="{{ url('checkout') }}">

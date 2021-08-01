@@ -661,8 +661,8 @@ top: 9%;
 /*-- //banner --*/
 /*-- footer --*/
 .footer{
-    padding: 70px 0;
-	border-top:1px solid #f1f1f1;
+    padding: 7px 0;
+	border-top:1px solid #685e5e;
 }
 .footer-left p{
     color: #848484;
@@ -745,7 +745,7 @@ top: 9%;
 p.copy-right {
     color: #848484;
     text-align: center;
-    margin-top: 62px;
+    margin-top: 7px;
     font-size: 14px;
 }
 p.copy-right a{

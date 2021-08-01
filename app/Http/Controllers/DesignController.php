@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\Admin\Product;
-use Route;
-use PDF;
 
 class DesignController extends Controller
 {
@@ -36,11 +34,11 @@ class DesignController extends Controller
             {
                 foreach($product as $row)
                 {
-                    $output .= '<div class="col-md-3 product-men">
+                    $output .= '<div class="col-md-2 product-men">
                         <div class="men-pro-item simpleCart_shelfItem">
                             <div class="men-thumb-item">';
                             $imageUrl = 'https://admin.bookfatafat.com/ProductImg/' . $row->product_img;
-                            $output .= '<img src="'.$imageUrl.'" alt="" class="pro-image-front">
+                            $output .= '<img src="'.$imageUrl.'" alt="" class="pro-image-front"style="height: 140px;">
                                 <img src="'.$imageUrl.'" alt="" class="pro-image-back">
                                 <div class="men-cart-pro">
                                     <div class="inner-men-cart-pro">';
@@ -150,7 +148,7 @@ class DesignController extends Controller
                         <div class="men-pro-item simpleCart_shelfItem">
                             <div class="men-thumb-item">';
                             $imageUrl = 'https://admin.bookfatafat.com/ProductImg/' . $row->product_img;
-                            $output .= '<img src="'.$imageUrl.'" alt="" class="pro-image-front">
+                            $output .= '<img src="'.$imageUrl.'" alt="" class="pro-image-front"style="height: 140px;>
                                 <img src="'.$imageUrl.'" alt="" class="pro-image-back">
                                 <div class="men-cart-pro">
                                     <div class="inner-men-cart-pro">';
@@ -211,8 +209,8 @@ class DesignController extends Controller
               
         }
     }
-
-    public function allServices()
+    
+     public function allServices()
     {
         return view('services');
     }
@@ -304,19 +302,5 @@ class DesignController extends Controller
             echo json_encode($data);
               
         }
-    }
-
-    public function invoice()
-    {
-        $folderPath = public_path('Invoice/');
-        // $paymentArray = (array)$lastPayment;
-        // dd($paymentArray);
-        $pdf = PDF::loadView('user.invoice')->setPaper('a4', 'landscape');
-        $fileName = uniqid() . '.pdf';
-
-        $file = $folderPath . $fileName;
-        $path = file_put_contents($file, $pdf->output());
-        $pdfFile = public_path('Invoice/'.$fileName);
-        return view('user.invoice');
     }
 }

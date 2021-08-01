@@ -21,7 +21,7 @@ class CreateOrdersTable extends Migration
             $table->enum('status', ['pending', 'processing', 'completed', 'decline'])->default('pending');
             $table->decimal('grand_total', 20);
             $table->unsignedInteger('item_count');
-            $table->boolean('payment_status')->default(1);
+            $table->enum('payment_status', ['Completed', 'Pending']);
             $table->string('name');
             $table->text('address')->nullable();
             $table->string('mobile_no');
