@@ -17,7 +17,7 @@
 			<h1><a href="{{ url('/') }}"><img src="{{ asset('frontasset/images/122 (1).png') }}"></a></h1>
 		</div>
 		<div class="col-md-6 header-middle">
-			<form method="POST">
+			<form method="POST" id="searchForm">
 				<div class="search">
 					<input type="search" id="search">
 				</div>
@@ -228,7 +228,7 @@
 								<div class="sign-in">
 									<h4>Password : <span class="error" id="pwd_err"></span></h4>
 									<input type="password" id="password-modal">
-									<a href="#">Forgot password?</a>
+									<a href="{{ url('/forgot-password') }}">Forgot password?</a>
 								</div>
 								<div class="single-bottom">
 									<input type="checkbox"  id="brand" value="">

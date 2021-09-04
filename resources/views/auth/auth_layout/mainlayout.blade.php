@@ -234,7 +234,12 @@ $('body').on('click', '#submitOtp', function () {
     }
 })
 
-
+$('#searchForm input').keydown(function (e) {
+    if (e.keyCode == 13) {
+        e.preventDefault();
+        return false;
+    }
+});
 
 </script>
 <script>

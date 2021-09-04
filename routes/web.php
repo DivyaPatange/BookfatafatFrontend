@@ -22,6 +22,8 @@ use App\Http\Controllers\DesignController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\User\OrderController;
 use App\Http\Controllers\User\BookServiceController;
+use App\Http\Controllers\User\ForgotPasswordController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -78,6 +80,9 @@ Route::get('/seed', function () {
     return 'DONE'; //Return anything
 });
 
+Route::get('/forgot-password', [ForgotPasswordController::class, 'index']);
+Route::post('/search-mobile-no', [ForgotPasswordController::class, 'searchMobile'])->name('search-mobile-no');
+Route::post('/save-pwd', [ForgotPasswordController::class, 'savePwd'])->name('save-pwd');
 
 Route::get('/invoices', [DesignController::class, 'invoice']);
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);

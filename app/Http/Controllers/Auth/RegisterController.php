@@ -109,7 +109,7 @@ class RegisterController extends Controller
                 'mobile_no' => $request->mobile_no,
                 'otp' => $otp,
             ]);
-            $message = "Dear+Customer,+please+use+the+code+".$createUser->otp."+to+verify+your+bookfatafat+account.";
+            $message = "Hello+".urlencode($request->name)."%0aWelcome+to+Bookfatafat.+"."%0aYour+OTP+is:-+".$otp.".%0aThanks+Bookfatafat+Team";
             $number = $createUser->mobile_no;
             $this->sendSms($message,$number);
             return response()->json(['success' => 'Registered Successfully!', 'mobile_no' => $createUser->mobile_no]);
@@ -120,9 +120,9 @@ class RegisterController extends Controller
                 return response()->json(['error' => 'Mobile No. is already registered']);
             }
             else{
-                $message = "Dear+Customer,+please+use+the+code+".$user->otp."+to+verify+your+bookfatafat+account.";
+                $message = "Hello+".urlencode($user->name)."%0aWelcome+to+Bookfatafat.+"."%0aYour+OTP+is:-+".$user->otp.".%0aThanks+Bookfatafat+Team";
                 $number = $user->mobile_no;
-                // $this->sendSms($message,$number);
+                $this->sendSms($message,$number);
                 return response()->json(['success' => 'Verify Your Account!', 'mobile_no' => $user->mobile_no]);
             }
         }
@@ -130,8 +130,7 @@ class RegisterController extends Controller
 
     public function sendSms($message,$number)
     {
-        $url = 'http://sms.bulksmsind.in/sendSMS?username=iceico&message='.$message.'&sendername=ICEICO&smstype=TRANS&numbers='.$number.'&apikey=24ae8ae0-b514-499b-8baf-51d55808a2c4';
-
+        $url = 'http://sms.bulksmsind.in/sendSMS?username=bookfatafat&message='.$message.'&sendername=BOOKFT&smstype=TRANS&numbers='.$number.'&apikey=22139f55-b446-462b-b035-bf7f4e3e4d33&peid=1201162071979493351&templateid=1207162869888634657';
         $ch = curl_init();  
         
     

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\Admin\Product;
+use Route;
 
 class DesignController extends Controller
 {
