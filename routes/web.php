@@ -110,6 +110,11 @@ Route::get('/payment-details', [OrderController::class, 'userPaymentDetails']);
 Route::resource('/book-service', BookServiceController::class);
 Route::get('/search-available-date', [BookServiceController::class, 'searchAvailableDate'])->name('search.available-date');
 Route::post('get-book-service', [BookServiceController::class, 'getBookService'])->name('get-book-service');
+Route::get('/serviceDetails/{id}', [BookServiceController::class, 'serviceDetails'])->name('service.details');
+Route::post('/service-payment/{id}', [BookServiceController::class, 'payment'])->name('service-payment');
+Route::post('/service-payment-success', [BookServiceController::class, 'servicePaymentSuccess'])->name('service-success');
+Route::get('/service-payment-success/{id}', [BookServiceController::class, 'paymentDetail'])->name('service-payment-success');
+Route::get('/get-booked-service', [BookServiceController::class, 'getBookedService'])->name('get-book-service.index');
 
 Route::get('/services', [DesignController::class, 'allServices']);
 Route::post('filter-service', [DesignController::class, 'filterService'])->name('filter.service');

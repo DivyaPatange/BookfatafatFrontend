@@ -19,11 +19,11 @@ class CreateBookServicesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedInteger('approved_by')->nullable();
             $table->foreign('approved_by')->references('id')->on('vendors');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->date('date');
+            $table->foreignId('available_date_id');
             $table->time('start_time');
             $table->time('end_time');
-            $table->string('duration');
+            $table->foreignId('time_slot_id');
             $table->enum('booking_status', ['Approved', 'Not Approved', 'Pending']);
             $table->timestamps();
         });

@@ -95,7 +95,8 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-    <form method="POST">
+    <form method="POST" action="{{ route('book-service.store') }}">
+        @csrf
         <div class="modal-body">
             <div class="form-group">
                 <div class="form-line">
@@ -122,7 +123,7 @@
         </div>
         <div class="modal-footer">
             <input type="hidden" name="available_date_id" id="available_date_id" value="">
-            <button type="button" class="btn bg-red waves-effect" id="book">Book Now</button>
+            <button type="submit" class="btn bg-red waves-effect" id="book">Book Now</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
     </form>
@@ -238,5 +239,9 @@ $('body').on('click', '#book', function () {
     }
   });
 })
+
+$(document).on('click', 'input[type="checkbox"]', function() {      
+    $('input[type="checkbox"]').not(this).prop('checked', false);      
+});
 </script>
 @endsection

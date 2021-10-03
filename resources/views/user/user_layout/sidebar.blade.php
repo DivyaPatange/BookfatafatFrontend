@@ -39,7 +39,13 @@
             <li>
                 <a href="{{ route('book-service.index') }}">
                     <i class="material-icons">assignment</i>
-                    <span>Book Service</span>
+                    <span>Services</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('get-book-service.index') }}">
+                    <i class="material-icons">assignment</i>
+                    <span>Booked Service</span>
                 </a>
             </li>
             <li>
